@@ -1,42 +1,91 @@
 // ;(function(){
 //   "use strict";
-var playerTurn ={
-  turn: true,
-  sign: "tic",
-  player: {
-    one: {
-      name: "",
-      turn: true
-    },
-    two: {
-      name: "",
-      turn: false
-    }
-  }
-}
+// var playerTurn = {
+//   turn: true,
+//   sign: "tic",
+//   player: {
+//     one: {
+//       name: "",
+//       turn: true
+//     },
+//     two: {
+//       name: "",
+//       turn: false
+//     }
+//   }
+// }
+// var module = (function () {
+//   var privateGameCounter, append;
+//   append = function( foo ){
+//     var foo = 0;
+//     if(foo%2==0){
+//       $("td").on("click", function( foo ){
+//         if($(this).hasClass("empty")){
+//           $(this).addClass("tic");
+//           $(this).removeClass("empty");
+//           foo++;
+//           console.log("tic");
+//           console.log(foo);
+//           return foo;
+//         }
+//       });
+//     } else {
+//       if($(this).hasClass("empty")){
+//         $(this).addClass("tac");
+//         $(this).removeClass("empty");
+//         foo++;
+//         console.log("tac");
+//         console.log(foo);
+//         return foo;
+//       }
+//     }
+//   }
+//   return {
+//     myPublicFunction: $("td").click(function(){
+//       append( "bar" );
+//     })
+//   }
+// })();
 
-var module = (function () {
-  var gameCounter, privateGameCounter, append;
-  gameCounter = 0;
-  append = function( foo ){
-    var foo = gameCounter;
-    if(foo%2===0){
-      $("td").on("click", function( foo ){
+(function(){
+  var tic, tac, count, counter, play, turn;
+  turn = 0;
+  tic = function(){
+    // $("td").mousedown(function(){
+      if($(this).hasClass("empty")){
         $(this).addClass("tic");
-        return console.log("tic");
-      })
-    } else if (foo%2===1){
-      $(this).addClass("tac");
-      return console.log("tac");
+        $(this).removeClass("empty");
+      }
+    // })
+  }
+  tac = function(){
+    // $("td").mousedown(function(){
+      if($(this).hasClass("empty")){
+        $(this).addClass("tac");
+        $(this).removeClass("empty");
+      }
+    // })
+  }
+  counter = function (){
+    turn+=1;
+    console.log(turn);
+    return turn;
+  }
+  play = function(){
+    if(turn % 2 === 0){
+      tic.call(this);
+    } else if(turn % 2 === 1){
+      tac.call(this);
+    } else{
+      return turn;
     }
   }
-  return {
-    myPublicVar: "foo",
-    myPublicFunction: $("td").click(function(){
-      append( "bar" );
-      gameCounter++;
-    })
-  }
+
+  $("td").click(function(){
+    play.call(this);
+    counter();
+  });
+
 })();
 
 // (function append(){

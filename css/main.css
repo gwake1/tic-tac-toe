@@ -17,8 +17,5 @@ table td {
   height:40px;
 }
 .tac{
-  content: 'x';
-  color: blue;
-  font-weight: 300;
-  font-family: Arial, sans-serif;
+  background-color: blue;
 }

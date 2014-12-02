@@ -52,24 +52,29 @@
   turn = 0;
   tic = function(){
     // $("td").mousedown(function(){
-      if($(this).hasClass("empty")){
-        $(this).addClass("tic");
-        $(this).removeClass("empty");
-      }
+    if($(this).hasClass("empty")){
+      $(this).addClass("tic");
+      $(this).removeClass("empty");
+    }
     // })
   }
   tac = function(){
     // $("td").mousedown(function(){
-      if($(this).hasClass("empty")){
-        $(this).addClass("tac");
-        $(this).removeClass("empty");
-      }
+    if($(this).hasClass("empty")){
+      $(this).addClass("tac");
+      $(this).removeClass("empty");
+    }
     // })
   }
   counter = function (){
-    turn+=1;
-    console.log(turn);
-    return turn;
+    if(!$(this).hasClass("empty") && !$(this).hasClass("played")){
+      turn+=1;
+      $(this).addClass("played");
+      console.log(turn);
+      return turn;
+    } else {
+      return turn;
+    }
   }
   play = function(){
     if(turn % 2 === 0){
@@ -83,7 +88,7 @@
 
   $("td").click(function(){
     play.call(this);
-    counter();
+    counter.call(this);
   });
 
 })();

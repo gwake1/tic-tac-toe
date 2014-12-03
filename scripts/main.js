@@ -1,76 +1,24 @@
-// ;(function(){
-//   "use strict";
-// var playerTurn = {
-//   turn: true,
-//   sign: "tic",
-//   player: {
-//     one: {
-//       name: "",
-//       turn: true
-//     },
-//     two: {
-//       name: "",
-//       turn: false
-//     }
-//   }
-// }
-// var module = (function () {
-//   var privateGameCounter, append;
-//   append = function( foo ){
-//     var foo = 0;
-//     if(foo%2==0){
-//       $("td").on("click", function( foo ){
-//         if($(this).hasClass("empty")){
-//           $(this).addClass("tic");
-//           $(this).removeClass("empty");
-//           foo++;
-//           console.log("tic");
-//           console.log(foo);
-//           return foo;
-//         }
-//       });
-//     } else {
-//       if($(this).hasClass("empty")){
-//         $(this).addClass("tac");
-//         $(this).removeClass("empty");
-//         foo++;
-//         console.log("tac");
-//         console.log(foo);
-//         return foo;
-//       }
-//     }
-//   }
-//   return {
-//     myPublicFunction: $("td").click(function(){
-//       append( "bar" );
-//     })
-//   }
-// })();
-
 (function(){
-  var tic, tac, count, counter, play, turn;
+  var turn, checkBoard, jeezy, tic, tac, counter, play, winner;
   turn = 0;
+  checkBoard = [];
+  jeezy = [];
   tic = function(){
-    // $("td").mousedown(function(){
     if($(this).hasClass("empty")){
       $(this).addClass("tic");
       $(this).removeClass("empty");
     }
-    // })
   }
   tac = function(){
-    // $("td").mousedown(function(){
     if($(this).hasClass("empty")){
       $(this).addClass("tac");
       $(this).removeClass("empty");
     }
-    // })
   }
   counter = function (){
     if(!$(this).hasClass("empty") && !$(this).hasClass("played")){
       turn+=1;
       $(this).addClass("played");
-      console.log(turn);
       return turn;
     } else {
       return turn;
@@ -85,28 +33,37 @@
       return turn;
     }
   }
-
+  winner = function(){
+    delete checkBoard;
+    var checkBoard = [];
+    var jeezy = []
+    checkBoard.push($("tr").children());
+    $.map(checkBoard, function(){
+      for(var i=0; i<9; i++){
+        jeezy.push(checkBoard[0][i].className)
+      }
+    });
+    if(jeezy[0] == jeezy[1] && jeezy[0] == jeezy[2] && jeezy[1]!="empty"){
+      alert("woop");
+    } else if(jeezy[3] == jeezy[4] && jeezy[3] == jeezy[5] && jeezy[3]!="empty"){
+      alert("woop");
+    } else if(jeezy[6] == jeezy[7] && jeezy[6] == jeezy[8] && jeezy[6]!="empty"){
+      alert("woop");
+    } else if(jeezy[0] == jeezy[3] && jeezy[0] == jeezy[6] && jeezy[0]!="empty"){
+      alert("woop");
+    } else if(jeezy[1] == jeezy[4] && jeezy[1] == jeezy[7] && jeezy[1]!="empty"){
+      alert("woop");
+    } else if(jeezy[2] == jeezy[5] && jeezy[2] == jeezy[8] && jeezy[2]!="empty"){
+      alert("woop");
+    } else if(jeezy[0] == jeezy[4] && jeezy[0] == jeezy[8] && jeezy[0]!="empty"){
+      alert("woop");
+    } else if(jeezy[2] == jeezy[4] && jeezy[2] == jeezy[6] && jeezy[2]!="empty"){
+      alert("woop");
+    }
+  }
   $("td").click(function(){
     play.call(this);
     counter.call(this);
+    winner.call(this);
   });
-
 })();
-
-// (function append(){
-//   $("td").click(function(){
-//     if(playerTurn.turn === true && $(this).hasClass("empty")){
-//       $(this).addClass("tic");
-//       $(this).removeClass("selected");
-//       gameTurn();
-//       $(this).removeClass("empty");
-//       winner();
-//     } else if (playerTurn.turn === false && $(this).hasClass("empty")){
-//       $(this).addClass("tac");
-//       $(this).removeClass("selected");
-//       gameTurn();
-//       $(this).removeClass("empty");
-//       winner();
-//     }
-//   })
-// }());
